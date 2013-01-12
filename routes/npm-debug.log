@@ -1,0 +1,19 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'nodejs', '/usr/bin/npm', 'version', 'jade' ]
+2 info using npm@1.1.69
+3 info using node@v0.8.16
+4 error version No package.json found
+5 error Error: ENOENT, open '/home/prestonp/projects/drawwww/routes/package.json'
+6 error If you need help, you may report this log at:
+6 error     <http://github.com/isaacs/npm/issues>
+6 error or email it to:
+6 error     <npm-@googlegroups.com>
+7 error System Linux 3.6.5-linode47
+8 error command "nodejs" "/usr/bin/npm" "version" "jade"
+9 error cwd /home/prestonp/projects/drawwww/routes
+10 error node -v v0.8.16
+11 error npm -v 1.1.69
+12 error path /home/prestonp/projects/drawwww/routes/package.json
+13 error code ENOENT
+14 error errno 34
+15 verbose exit [ 34, true ]

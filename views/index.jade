@@ -1,5 +1,42 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .menu 
+    h1= title
+    p Welcome to #{title}
+
+
+  .container-fluid
+    .row-fluid
+      .span3.toolbar
+        h3 color
+          .current-color
+        h3 palette
+        table.palette
+          tbody
+            tr
+              td 1
+              td 2
+              td 3
+              td 4
+              td 5
+              td 6
+            tr
+              td 7
+              td 8 
+              td 9
+              td 10
+              td 11
+              td 12
+        h3 size
+        #size-slider
+        h3 opacity
+        #opacity-slider
+        h3 tool
+        .btn-group#tools
+          button.btn brush
+          button.btn.active eraser
+          button.btn line
+      .span8.surface
+        canvas(width='500', height='200', id='drawwwwCanvas')
+

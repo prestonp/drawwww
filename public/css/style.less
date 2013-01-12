@@ -1,0 +1,55 @@
+// Colors 
+@lightblu: #0544EE;
+@gray: #c0c0c0;
+@lightgray: #dbdbdb;
+@darkgray: #2b2b2b;
+@white: #ffffff;
+
+// Size
+@border-radius: 4px;
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: @darkgray !important;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.palette {
+  border: 1px solid @gray;
+  -webkit-border--radius: @border-radius;
+  border-radius: @border-radius;
+  -moz-border-radius: @border-radius;
+}
+
+table.palette td {
+  width: 32px;
+  height: 32px;
+  border: 1px solid @gray;
+}
+
+.current-color {
+  width: 32px;
+  height: 32px; 
+  border: 1px solid @gray;
+}
+
+.toolbar {
+  background-color: @white;
+  padding: 10px;
+}
+
+.menu {
+  color: @white !important;
+} 
+
+.surface {
+  background-color: @white;
+}
+
+
+#size-slider .ui-slider-range { background: #8ae234; }
+#size-slider .ui-slider-handle { border-color: #8ae234; }

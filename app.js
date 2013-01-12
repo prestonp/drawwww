@@ -7,7 +7,9 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , redis = require('redis')
+  , db = redis.createClient();
 
 var app = express();
 
@@ -24,6 +26,9 @@ app.configure(function(){
   app.use(app.router);
   app.use(require('less-middleware')({ src: __dirname + '/public' }));
   app.use(express.static(path.join(__dirname, 'public')));
+  app.use(function(req, res, next) {
+    res.send(404, '404 - Something has gone awry..');
+  });
 });
 
 app.configure('development', function(){
