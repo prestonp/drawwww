@@ -31,6 +31,43 @@ table.palette td {
 }
 .surface {
   background-color: #ffffff;
+  padding: 10px;
+}
+.swatch1 {
+  background-color: #3be708;
+}
+.swatch2 {
+  background-color: #38aee5;
+}
+.swatch3 {
+  background-color: #f74a88;
+}
+.swatch4 {
+  background-color: #ff8f00;
+}
+.swatch5 {
+  background-color: #dcff33;
+}
+.swatch6 {
+  background-color: #138654;
+}
+.swatch7 {
+  background-color: #e21208;
+}
+.swatch8 {
+  background-color: #d879dc;
+}
+.swatch9 {
+  background-color: #622f13;
+}
+.swatch10 {
+  background-color: #ffffff;
+}
+.swatch11 {
+  background-color: #8f8f8f;
+}
+.swatch12 {
+  background-color: #000000;
 }
 #size-slider .ui-slider-range {
   background: #8ae234;

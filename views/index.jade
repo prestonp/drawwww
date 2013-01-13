@@ -1,33 +1,32 @@
 extends layout
 
 block content
-  .menu 
-    h1= title
-    p Welcome to #{title}
-
-
   .container-fluid
+    .row-fluid.menu
+      .span12
+        h1 Drawwww
+        p share something new!
     .row-fluid
       .span3.toolbar
         h3 color
-          .current-color
+          .current-color.swatch
         h3 palette
         table.palette
           tbody
             tr
-              td 1
-              td 2
-              td 3
-              td 4
-              td 5
-              td 6
+              td.swatch.swatch1
+              td.swatch.swatch2
+              td.swatch.swatch3
+              td.swatch.swatch4
+              td.swatch.swatch5
+              td.swatch.swatch6
             tr
-              td 7
-              td 8 
-              td 9
-              td 10
-              td 11
-              td 12
+              td.swatch.swatch7
+              td.swatch.swatch8
+              td.swatch.swatch9
+              td.swatch.swatch10
+              td.swatch.swatch11
+              td.swatch.swatch12
         h3 size
         #size-slider
         h3 opacity
@@ -37,6 +36,18 @@ block content
           button.btn brush
           button.btn.active eraser
           button.btn line
-      .span8.surface
-        canvas(width='500', height='200', id='drawwwwCanvas')
+          button.btn eyedrper
+      .span6.surface
+        canvas(width='500', height='500', id='drawwwwCanvas')
 
+      #colorModal.modal.hide.fade(tabindex='-1', role='dialog', aria-labelledby='colorModalLabel', aria-hidden='true')
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-hidden='true')
+          h3 Pick a color
+        .modal-body
+          form
+            input#color(type='text', value='#ff0000')
+          #colorpicker
+        .modal-footer
+          button.btn(data-dismiss='modal', aria-hidden='true') Close
+          button#set-color.btn.btn-primary Set Color
