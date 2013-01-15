@@ -20,6 +20,7 @@ $(function() {
 });
 
 $(document).ready(function() {
+  init();
   var $currswatch = null;
 
   /**
@@ -70,3 +71,73 @@ $(document).ready(function() {
   }); 
  
 });
+
+function init() {
+
+  tool = new ToolPencil();
+
+  canvas.addEventListener('mousedown', canvasEvent, false);
+  canvas.addEventListener('mousemove', canvasEvent, false);
+  canvas.addEventListener('mouseup', canvasEvent, false);
+}
+
+function ToolPencil () {
+  var tool = this;
+  this.started = false;
+
+  this.mousedown = function (e) {
+    ctx.beginPath();
+    ctx.moveTo(e._x, e._y);
+    tool.started = true;
+  };
+
+  this.mousemove = function (e) {
+    if(tool.started) {
+      ctx.lineTo(e._x, e._y);
+      ctx.stroke();
+     }
+  }; 
+
+  this.mouseup = function (e) {
+    if(tool.started) {
+      tool.mousemove(e);
+      tool.started = false;
+    }
+  };
+}
+
+function canvasEvent (e) {
+  if(e.layerX || e.layerX == 0) {
+    e._x = e.layerX;
+    e._y = e.layerY;
+  } else if (e.offsetX || e.offsetX == 0) {
+    e._x = e.offsetX;
+    e._y = e.offsetY;
+  }
+
+  var func = tool[e.type];
+  if (func) {
+    func(e);
+  }
+}
+var started = false;
+function mousemoveEvent(e) {
+  var x, y;
+
+  if (e.layerx || e.layerX == 0) { // Firefox
+     x = e.layerX;
+     y = e.layerY;
+  } else if (e.offsetX || e.offsetX == 0) { //Opera
+     x = e.offsetX;
+     y = e.offsetY;
+  }
+
+  if(!started) {
+     ctx.beginPath();
+     ctx.moveTo(x, y);
+     started = true;
+  } else {
+     ctx.lineTo(x, y);
+     ctx.stroke();
+  }
+}
