@@ -1,41 +1,77 @@
-var canvas = document.getElementById('drawwwwCanvas');
+// Base canvas
+var canvaso = document.getElementById('drawwwwCanvas');
+var ctxo = canvaso.getContext('2d');
+ctxo.fillStyle = 'red';
+ctxo.fillRect(30, 30, 50, 50);
+
+// Buffer canvas
+var container = canvaso.parentNode;
+var canvas = document.createElement('canvas');
+canvas.id = 'bufferCanvas';
+canvas.width = canvaso.width;
+canvas.height = canvaso.height;
+canvas.top = canvaso.top;
+container.appendChild(canvas);
+$('#bufferCanvas').css('left', $('#drawwwwCanvas').offset()['left']);
+$('#bufferCanvas').css('top', $('#drawwwwCanvas').offset()['top']);
 var ctx = canvas.getContext('2d');
-
-ctx.fillStyle = 'red';
-ctx.fillRect(30, 30, 50, 50);
-
+ctx.lineCap = 'round';
 
 $(function() {
   /* Set up jQueryUI sliders */
   $('#size-slider').slider({
-    value: 50,
+    value: 10,
+    min: 1,
+    max: 20,
     range: 'min',
     orientation: 'horizontal'
   });
   $('#opacity-slider').slider({
-    value: 85,
+    value: 100,
+    min: 1,
+    max: 100,
     range: 'min',
     orientation: 'horizontal'
   });
 });
 
+
+/**
+  This function draws the #imageTemp canvas on top of #imageView,
+  after which #imageTemp is cleared. This function is called each time when the
+  user completes a drawing operation.
+**/
+function imgUpdate () {
+  ctxo.drawImage(canvas, 0, 0);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+/**
+  Convert rgb or rgba values 
+  to hexadecimal
+**/
+function rgba2hex(str) {
+  str = str.indexOf("rgba") !== -1 ?
+    str.match(/^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d+)\)$/) : 
+    str.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  function hex(x) {
+    return ("0" + parseInt(x).toString(16)).slice(-2);
+  }
+  return "#" + hex(str[1]) + hex(str[2]) + hex(str[3]);
+}
+
 $(document).ready(function() {
   init();
   var $currswatch = null;
 
-  /**
-    Convert rgb or rgba values 
-    to hexadecimal
+  /** 
+    Set current tool
   **/
-  function rgba2hex(str) {
-    str = str.indexOf("rgba") !== -1 ?
-            str.match(/^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d+)\)$/) : 
-            str.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-    function hex(x) {
-      return ("0" + parseInt(x).toString(16)).slice(-2);
-    }
-    return "#" + hex(str[1]) + hex(str[2]) + hex(str[3]);
-  }
+  $('#tools button').on('click', function(event) {
+    $('#tools button').removeClass('active');
+    $(this).addClass('active');
+    activateTool($(this).attr('id'));
+  }); 
 
   /**
     Double click swatches to open
@@ -72,19 +108,87 @@ $(document).ready(function() {
  
 });
 
+// Active tool instance
+var tool = false;
+var tool_default = 'brush';
+
+// Holds impementation of each drawing tool
+var tools = {};
+
 function init() {
 
-  tool = new ToolPencil();
+  // Activate default tool
+  activateDefaultTool();
 
+  // set up event handlers
+  registerEventHandlers();
+}
+
+function activateDefaultTool() {
+  // Find default tool
+  var type = $('#tools button.active').attr('id');
+    
+  // Find control and apply active state
+  activateTool(type);
+
+  // Set current 'tool'
+}
+
+function activateTool(type) {
+  switch(type) {
+    case 'brush' :
+      tool = new ToolPencil();
+      break;
+    case 'eraser' :
+      tool = new ToolEraser();
+      break;
+    default :
+      tool = new ToolPencil();
+      break;
+  }
+}
+
+function registerEventHandlers() {
   canvas.addEventListener('mousedown', canvasEvent, false);
   canvas.addEventListener('mousemove', canvasEvent, false);
   canvas.addEventListener('mouseup', canvasEvent, false);
 }
 
+
+
 function ToolPencil () {
   var tool = this;
   this.started = false;
 
+  this.mousedown = function (e) {
+    ctx.beginPath();
+    ctx.strokeStyle = getColor();   
+    ctx.moveTo(e._x, e._y);
+    tool.started = true;
+  };
+
+  this.mousemove = function (e) {
+    if(tool.started) {
+      ctx.lineTo(e._x, e._y);
+      ctx.lineWidth = $( "#size-slider" ).slider( "option", "value" );
+      ctx.stroke();
+      imgUpdate();
+     }
+  }; 
+
+  this.mouseup = function (e) {
+    if(tool.started) {
+      tool.mousemove(e);
+      tool.started = false;
+      imgUpdate();
+    }
+  };
+}
+
+function ToolEraser() {
+  var tool = this;
+  this.started = false;
+  
   this.mousedown = function (e) {
     ctx.beginPath();
     ctx.moveTo(e._x, e._y);
@@ -94,6 +198,7 @@ function ToolPencil () {
   this.mousemove = function (e) {
     if(tool.started) {
       ctx.lineTo(e._x, e._y);
+      ctx.strokeStyle = '#ffffff';
       ctx.stroke();
      }
   }; 
@@ -120,24 +225,14 @@ function canvasEvent (e) {
     func(e);
   }
 }
-var started = false;
-function mousemoveEvent(e) {
-  var x, y;
 
-  if (e.layerx || e.layerX == 0) { // Firefox
-     x = e.layerX;
-     y = e.layerY;
-  } else if (e.offsetX || e.offsetX == 0) { //Opera
-     x = e.offsetX;
-     y = e.offsetY;
-  }
-
-  if(!started) {
-     ctx.beginPath();
-     ctx.moveTo(x, y);
-     started = true;
-  } else {
-     ctx.lineTo(x, y);
-     ctx.stroke();
-  }
+function getColor() {
+  var color = $('.current-color').css('background-color');
+  /*
+  color = color.replace('rgb', 'rgba');
+  color = color.replace(')', '');
+  color += ', ' + ($( "#opacity-slider" ).slider( "option", "value" ) / 100.0) + ')';
+  */
+  ctx.globalAlpha = $( "#opacity-slider" ).slider( "option", "value" ) / 100.0;
+  return rgba2hex(color);
 }

@@ -4,6 +4,7 @@
 @lightgray: #dbdbdb;
 @darkgray: #2b2b2b;
 @white: #ffffff;
+@black: #000000;
 
 // Palette colors
 @swatch1: #3be708;
@@ -21,6 +22,7 @@
 
 // Size
 @border-radius: 4px;
+@canvas-size: 500px;
 
 body {
   padding: 50px;
@@ -49,6 +51,7 @@ table.palette td {
   width: 32px;
   height: 32px; 
   border: 1px solid @gray;
+  background-color: @black;
 }
 
 .toolbar {
@@ -62,7 +65,22 @@ table.palette td {
 
 .surface {
   background-color: @white;
-  padding: 10px;
+  width: @canvas-size !important;
+  height: @canvas-size !important;
+}
+
+#container {
+  position: relative;
+}
+
+#drawwwwCanvas {
+  border: 1px solid @black; 
+}
+
+#bufferCanvas {
+  position: absolute;
+  top: 1px;
+  left: 1px;
 }
 
 .swatch1 { background-color: @swatch1; }
