@@ -1,7 +1,7 @@
 drawwww
 =======
 
-draw and share pictures! &lt;3
+a super simple canvas project built on nodejs for drawing and sharing pictures! &lt;3
 
 # Under heavy development!!
 
