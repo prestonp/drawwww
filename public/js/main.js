@@ -237,10 +237,12 @@ function getColor() {
 
 function uploadImage() {
   //var imageData = ctxo.getImageData(0, 0, canvaso.width, canvaso.height);
-
+  
   $.post('/images', 
   {
-    img : canvaso.toDataURL()
+    img : canvaso.toDataURL(),
+    title : $('#image-title').val(),
+    user : $('#image-user').val()
   },
   function(data) {
     window.location.replace('./images/'+data);
@@ -250,4 +252,8 @@ function uploadImage() {
 
 function clearImage() {
   ctxo.clearRect(0,0,canvaso.width,canvaso.height)
+}
+
+function imageDirectLink() {
+  window.location.replace('http://' + $('#direct-link').val());
 }

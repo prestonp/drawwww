@@ -38,6 +38,12 @@
   border-radius: @radius;
 }
 
+.shadowed-swatch (@offset: 2px, @blur: 3px, @shadow-color: #999) {
+  -moz-box-shadow: @offset @offset @blur @shadow-color;
+  -webkit-box-shadow: @offset @offset @blur @shadow-color;
+  box-shadow: @offset @offset @blur @shadow-color;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -48,28 +54,29 @@ a {
   color: #00B7FF;
 }
 
-.palette {
-  border: 1px solid @gray;
-  .rounded-corners;
-}
-
-table.palette td {
+.swatch {
+  .shadowed-swatch;
   width: 32px;
   height: 32px;
   border: 1px solid @gray;
 }
 
+.palette {
+  border-collapse: collapse;
+  border-spacing: 0em;
+  .rounded-corners;
+}
+
 .current-color {
   width: 32px;
   height: 32px; 
-  border: 1px solid @gray;
   background-color: @black;
 }
 
 .toolbar {
   .rounded-corners;
   background-color: @white;
-  padding: 10px;
+  padding: 10px 20px 10px 10px;
 }
 
 .menu {
@@ -106,11 +113,46 @@ table.palette td {
   font-family: @logo-font-family;
 }
 
+.logo:hover {
+  text-decoration: none;
+  color: lighten(@logo-color, 30%); 
+}
+
 .logo-sub {
   margin-top: -10px;
   letter-spacing:1px;
   color: @logo-sub-color;
   font-family: @logo-sub-font-family;
+}
+
+.options {
+  margin-top: 10px;
+  width: @canvas-size;
+}
+
+.form-inline .btn-primary {
+  margin-right: 5px;
+}
+
+.form-inline .input-small {
+  margin-right: 10px;
+  width: 160px;
+}
+
+.details {
+  text-align: center;
+  width: 500px;
+  margin: 10px;
+  font-family: @logo-font-family;
+  font-size: 200%;
+  color: @logo-sub-color;
+}
+
+.details .user {
+  font-family: @logo-sub-font-family;
+  font-size: 75%;
+  color: @white;
+  display: inline;
 }
 .swatch1 { background-color: @swatch1; }
 .swatch2 { background-color: @swatch2; }
@@ -125,5 +167,7 @@ table.palette td {
 .swatch11 { background-color: @swatch11; }
 .swatch12 { background-color: @swatch12; }
 
-#size-slider .ui-slider-range { background: #8ae234; }
-#size-slider .ui-slider-handle { border-color: #8ae234; }
+#size-slider .ui-slider-range { background: @logo-color; }
+#size-slider .ui-slider-handle { border-color: @logo-color; }
+#opacity-slider .ui-slider-range { background: @logo-sub-color; }
+#opacity-slider .ui-slider-handle { border-color: @logo-sub-color; }

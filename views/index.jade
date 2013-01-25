@@ -4,7 +4,8 @@ block content
   .container-fluid
     .row-fluid.menu
       .span12.offset2
-        h1.logo Drawwww
+        h1
+          a.logo(href='/') Drawwww &nbsp;
         p.logo-sub share something new!
     .row-fluid
       .span3.offset2.toolbar
@@ -52,8 +53,9 @@ block content
           button.btn(data-dismiss='modal', aria-hidden='true') Close
           button#set-color.btn.btn-primary Set Color
     .row-fluid
-      .offset5.span3
-        p
-          button.btn-small.btn-primary(type='button', onClick='uploadImage()') Save
-          button.btn-small(type='button', onClick='clearImage()') Clear
-
+      .offset5.options
+        form.form-inline
+          input.input-small#image-title(type='text', placeholder='title')
+          input.input-small#image-user(type='text', placeholder='created by')
+          button.btn.pull-right(type='button', onClick='clearImage()') Clear
+          button.btn.btn-primary.pull-right(type='button', onClick='uploadImage()') Save
