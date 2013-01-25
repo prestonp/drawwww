@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , image = require('./routes/image')
   , http = require('http')
   , path = require('path')
   , redis = require('redis')
@@ -26,6 +27,7 @@ app.configure(function(){
   app.use(app.router);
   app.use(require('less-middleware')({ src: __dirname + '/public' }));
   app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(__dirname, '/images'));
   app.use(function(req, res, next) {
     res.send(404, '404 - Something has gone awry..');
   });
@@ -35,8 +37,13 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.get('/', routes.index); 
+app.post('/images', image.create);  // Add new image
+app.all('/images', image.list);     // Retrieve all images
+app.get('/images/remove', image.remove);
+app.get('/images/:id', image.view); // View image
 app.get('/users', user.list);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

@@ -1,8 +1,6 @@
 // Base canvas
 var canvaso = document.getElementById('drawwwwCanvas');
 var ctxo = canvaso.getContext('2d');
-ctxo.fillStyle = 'red';
-ctxo.fillRect(30, 30, 50, 50);
 
 // Buffer canvas
 var container = canvaso.parentNode;
@@ -235,4 +233,21 @@ function getColor() {
   */
   ctx.globalAlpha = $( "#opacity-slider" ).slider( "option", "value" ) / 100.0;
   return rgba2hex(color);
+}
+
+function uploadImage() {
+  //var imageData = ctxo.getImageData(0, 0, canvaso.width, canvaso.height);
+
+  $.post('/images', 
+  {
+    img : canvaso.toDataURL()
+  },
+  function(data) {
+    window.location.replace('./images/'+data);
+    //alert(data);
+  });
+}
+
+function clearImage() {
+  ctxo.clearRect(0,0,canvaso.width,canvaso.height)
 }

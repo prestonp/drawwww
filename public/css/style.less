@@ -24,6 +24,20 @@
 @border-radius: 4px;
 @canvas-size: 500px;
 
+// Web fonts
+@logo-font-family: 'Permanent Marker';
+@logo-color: #2FEBD5;
+@logo-sub-font-family: 'PT Sans';
+@logo-sub-color: #f65aca;
+
+.rounded-corners (@radius: 4px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -36,9 +50,7 @@ a {
 
 .palette {
   border: 1px solid @gray;
-  -webkit-border--radius: @border-radius;
-  border-radius: @border-radius;
-  -moz-border-radius: @border-radius;
+  .rounded-corners;
 }
 
 table.palette td {
@@ -55,6 +67,7 @@ table.palette td {
 }
 
 .toolbar {
+  .rounded-corners;
   background-color: @white;
   padding: 10px;
 }
@@ -64,6 +77,7 @@ table.palette td {
 } 
 
 .surface {
+  .rounded-corners;
   background-color: @white;
   width: @canvas-size !important;
   height: @canvas-size !important;
@@ -73,16 +87,31 @@ table.palette td {
   position: relative;
 }
 
-#drawwwwCanvas {
-  border: 1px solid @black; 
-}
-
 #bufferCanvas {
   position: absolute;
   top: 1px;
   left: 1px;
 }
 
+.detailform {
+  .rounded-corners;
+  background-color: @white;
+  width: 470px; // total width totals canvas size
+  margin: 10px;
+  padding: 20px;
+}
+
+.logo {
+  color: @logo-color;
+  font-family: @logo-font-family;
+}
+
+.logo-sub {
+  margin-top: -10px;
+  letter-spacing:1px;
+  color: @logo-sub-color;
+  font-family: @logo-sub-font-family;
+}
 .swatch1 { background-color: @swatch1; }
 .swatch2 { background-color: @swatch2; }
 .swatch3 { background-color: @swatch3; }

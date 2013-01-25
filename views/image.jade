@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .row-fluid
+    h1.offset2.logo Drawwww
+  .row-fluid    
+    img.surface.offset2(src=path, height=500, width=500).img-polaroid
+  .row-fluid
+    .offset2.detailform
+      span.label.label-inverse Direct Link:
+      br
+      .input-append
+        input(type='text')= path
+        button.btn(type='button') Copy
+      a.btn.btn-large(href='/') Back

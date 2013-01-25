@@ -8,9 +8,11 @@ a {
 }
 .palette {
   border: 1px solid #c0c0c0;
-  -webkit-border--radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
 }
 table.palette td {
   width: 32px;
@@ -24,6 +26,11 @@ table.palette td {
   background-color: #000000;
 }
 .toolbar {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
   background-color: #ffffff;
   padding: 10px;
 }
@@ -31,6 +38,11 @@ table.palette td {
   color: #ffffff !important;
 }
 .surface {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
   background-color: #ffffff;
   width: 500px !important;
   height: 500px !important;
@@ -38,13 +50,31 @@ table.palette td {
 #container {
   position: relative;
 }
-#drawwwwCanvas {
-  border: 1px solid #000000;
-}
 #bufferCanvas {
   position: absolute;
   top: 1px;
   left: 1px;
+}
+.detailform {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  width: 470px;
+  margin: 10px;
+  padding: 20px;
+}
+.logo {
+  color: #2febd5;
+  font-family: 'Permanent Marker';
+}
+.logo-sub {
+  margin-top: -10px;
+  letter-spacing: 1px;
+  color: #f65aca;
+  font-family: 'PT Sans';
 }
 .swatch1 {
   background-color: #3be708;
