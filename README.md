@@ -1,7 +1,7 @@
 drawwww
 =======
 
-a super simple canvas project built on nodejs for drawing and sharing pictures! &lt;3
+a super simple canvas project built with nodejs for drawing and sharing pictures! &lt;3
 
 # Under heavy development!!
 
@@ -9,4 +9,4 @@ a super simple canvas project built on nodejs for drawing and sharing pictures! 
 * Install nodejs, npm, and redis-server
 * Run `npm install` and then `node app` to start server
 
-See a demo [here](http://bit.ly/UZ6haD)
+See a demo [here](http://drawwww.com)
