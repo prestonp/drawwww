@@ -81,7 +81,7 @@ $(document).ready(function() {
     var $hex = rgba2hex($curr.css('background-color'));
     $('#colorModal').modal('show');
     $('#color').attr('value', $hex);
-    $('#colorpicker').farbtastic('#color');
+    $.farbtastic('#colorpicker').setColor($hex);
     $currswatch = $curr;
   });
 
@@ -102,6 +102,7 @@ $(document).ready(function() {
   $('#set-color').click(function() {
     var $hex = $('#color').attr('value');
     $currswatch.css('background-color', $hex);
+    $('.current-color').css('background-color', $hex);
     $('#colorModal').modal('hide');
   }); 
  
@@ -115,6 +116,9 @@ var tool_default = 'brush';
 var tools = {};
 
 function init() {
+
+  // Activate color picker
+  $('#colorpicker').farbtastic('#color');
 
   // Activate default tool
   activateDefaultTool();

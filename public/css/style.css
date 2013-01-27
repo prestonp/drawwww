@@ -120,6 +120,11 @@ a {
   color: #ffffff;
   display: inline;
 }
+body .modal {
+  width: auto;
+  left: 60%;
+  top: 30% !important;
+}
 .swatch1 {
   background-color: #3be708;
 }
