@@ -4,7 +4,7 @@ body {
   background-color: #2b2b2b !important;
 }
 a {
-  color: #00B7FF;
+  color: #2febd5;
 }
 .swatch {
   -moz-box-shadow: 2px 2px 3px #999999;
@@ -50,6 +50,17 @@ a {
   width: 500px !important;
   height: 500px !important;
 }
+.surface-thumb {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  width: 100px;
+  height: 100px;
+  margin: 2px;
+}
 #container {
   position: relative;
 }
@@ -78,6 +89,7 @@ a {
   color: #bbf8f1;
 }
 .logo-sub {
+  display: inline;
   margin-top: -10px;
   letter-spacing: 1px;
   color: #f65aca;

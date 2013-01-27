@@ -50,6 +50,8 @@ exports.create = function(req, res) {
     });
     console.log('saving, user: ' + req.body.user + ', title: ' + req.body.title);
     // Store list of keys and set ids->file pair
+    client.lpush('recent', id);
+    client.ltrim('recent', 0, 99);
     client.lpush('mylist', id);
     client.set('id:'+id, path);
     client.set('id:'+id+':user', req.body.user);
@@ -61,4 +63,20 @@ exports.create = function(req, res) {
 exports.remove = function(req, res) {
   client.del('mylist');
   res.send('Deleted records');
+}
+
+exports.recent = function(req, res) {
+  client.lrange('recent', 0, 100, function(err, vals) {
+    if(err!=null) {
+      console.log('error retrieving recent: ' + err);
+    }
+    console.log('my stuff: '+vals);
+
+    var imgURLs = []
+    for(i in vals) {
+      imgURLs.push('../files/' + vals[i] + '.png');
+    }
+    res.render('recent', {ids : vals, urls : imgURLs});
+  });
+  //res.render('recent', { stuff : 'blahblah blah' } );
 }

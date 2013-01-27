@@ -40,6 +40,7 @@ app.configure('development', function(){
 app.get('/', routes.index); 
 app.post('/images', image.create);  // Add new image
 app.all('/images', image.list);     // Retrieve all images
+app.get('/images/recent', image.recent);
 app.get('/images/remove', image.remove);
 app.get('/images/:id', image.view); // View image
 app.get('/users', user.list);

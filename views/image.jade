@@ -2,7 +2,8 @@ extends layout
 
 block content
   .row-fluid
-    h1.offset2.logo Drawwww
+   h1.offset2
+     a.logo(href='/') Drawwww &nbsp;
   .row-fluid    
     img.surface.offset2(src=path, height=500, width=500).img-polaroid
   .row-fluid
@@ -15,4 +16,4 @@ block content
       .input-append
         input#direct-link(type='text', value=directPath) 
         button.btn(type='button', onclick='imageDirectLink()') Go
-      a.btn(href='/') Back
+      a.btn(href='javascript:history.go(-1)') Back

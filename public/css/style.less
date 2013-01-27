@@ -51,7 +51,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: @logo-color;
 }
 
 .swatch {
@@ -90,6 +90,14 @@ a {
   height: @canvas-size !important;
 }
 
+.surface-thumb {
+  .rounded-corners;
+  background-color: @white;
+  width: 100px;
+  height: 100px;
+  margin: 2px;
+}
+
 #container {
   position: relative;
 }
@@ -119,6 +127,7 @@ a {
 }
 
 .logo-sub {
+  display: inline;
   margin-top: -10px;
   letter-spacing:1px;
   color: @logo-sub-color;

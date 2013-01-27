@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  .row-fluid
+   h1.offset2
+     a.logo(href='/') Drawwww &nbsp;
+     - for (var i=0; i<ids.length; i++) 
+         - if (i%5 == 0)
+           .row-fluid
+         a(href=ids[i])
+           img.surface-thumb(src=urls[i])

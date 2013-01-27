@@ -14,6 +14,7 @@ $('#bufferCanvas').css('left', $('#drawwwwCanvas').offset()['left']);
 $('#bufferCanvas').css('top', $('#drawwwwCanvas').offset()['top']);
 var ctx = canvas.getContext('2d');
 ctx.lineCap = 'round';
+ctx.lineJoin = 'round';
 
 $(function() {
   /* Set up jQueryUI sliders */
@@ -176,8 +177,12 @@ function ToolPencil () {
 
   this.mouseup = function (e) {
     if(tool.started) {
+      ctx.lineTo(e._x, e._y);
+      ctx.lineWidth = $( "#size-slider" ).slider( "option", "value" );
+      ctx.stroke();
       tool.mousemove(e);
       tool.started = false;
+      
       imgUpdate();
     }
   };
