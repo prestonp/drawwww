@@ -166,6 +166,7 @@ function ToolPencil () {
   this.mousedown = function (e) {
     ctx.beginPath();
     ctx.strokeStyle = getColor();   
+    ctx.lineWidth = $( "#size-slider" ).slider( "option", "value" );
     ctx.moveTo(e._x, e._y);
     tool.started = true;
   };
@@ -173,7 +174,6 @@ function ToolPencil () {
   this.mousemove = function (e) {
     if(tool.started) {
       ctx.lineTo(e._x, e._y);
-      ctx.lineWidth = $( "#size-slider" ).slider( "option", "value" );
       ctx.stroke();
       imgUpdate();
      }
@@ -182,11 +182,9 @@ function ToolPencil () {
   this.mouseup = function (e) {
     if(tool.started) {
       ctx.lineTo(e._x, e._y);
-      ctx.lineWidth = $( "#size-slider" ).slider( "option", "value" );
       ctx.stroke();
       tool.mousemove(e);
       tool.started = false;
-      
       imgUpdate();
     }
   };
@@ -198,6 +196,8 @@ function ToolEraser() {
   
   this.mousedown = function (e) {
     ctx.beginPath();
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = $( "#size-slider" ).slider( "option", "value" );
     ctx.moveTo(e._x, e._y);
     tool.started = true;
   };
@@ -205,8 +205,8 @@ function ToolEraser() {
   this.mousemove = function (e) {
     if(tool.started) {
       ctx.lineTo(e._x, e._y);
-      ctx.strokeStyle = '#ffffff';
       ctx.stroke();
+      imgUpdate();
      }
   }; 
 
@@ -214,6 +214,7 @@ function ToolEraser() {
     if(tool.started) {
       tool.mousemove(e);
       tool.started = false;
+      imgUpdate();
     }
   };
 }

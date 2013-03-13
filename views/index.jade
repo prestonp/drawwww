@@ -3,7 +3,7 @@ extends layout
 block content
   .container-fluid
     .row-fluid.menu
-      .span7.offset2
+      .span8.offset2
         h1
           a.logo(href='/') Drawwww &nbsp;
         p.logo-sub share something new!
@@ -47,8 +47,8 @@ block content
             input.input-small#image-user(type='text', placeholder='created by')
             button.btn.pull-right(type='button', onClick='clearImage()') Clear
             button.btn.btn-primary.pull-right(type='button', onClick='uploadImage()') Save
-          iframe(src="http://ghbtns.com/github-btn.html?user=prestonp&repo=drawwww&type=watch&count=true", allowtransparency="true", frameborder="0", scrolling="0", width="95", height="20")
-          iframe(src="http://ghbtns.com/github-btn.html?user=prestonp&repo=drawwww&type=fork&count=true", allowtransparency="true", frameborder="0", scrolling="0", width="95", height="20")
+          //iframe(src="http://ghbtns.com/github-btn.html?user=prestonp&repo=drawwww&type=watch&count=true", allowtransparency="true", frameborder="0", scrolling="0", width="95", height="20")
+          //iframe(src="http://ghbtns.com/github-btn.html?user=prestonp&repo=drawwww&type=fork&count=true", allowtransparency="true", frameborder="0", scrolling="0", width="95", height="20")
 
   #colorModal.modal.hide.fade(tabindex='-1', role='dialog', aria-labelledby='colorModalLabel', aria-hidden='true')
     .modal-header

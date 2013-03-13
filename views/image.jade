@@ -7,8 +7,15 @@ block content
   .row-fluid    
     img.surface.offset2(src=path, height=500, width=500).img-polaroid
   .row-fluid
-    .offset2.details #{title} &nbsp;
-      .user by #{user}
+    if title == '' && user == ''
+      br
+    else if title == ''
+      .offset2.details by #{user}
+    else if user == ''
+      .offset2.details #{title}
+    else
+      .offset2.details #{title} &nbsp;
+        .user by #{user}
   .row-fluid
     .offset2.detailform
       span.label.label-inverse Direct Link:
